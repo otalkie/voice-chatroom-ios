@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3396FE9202F45C9183EBEAD3 /* Pods_Intercom_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F30C8D41480033DD3B9E2AA3 /* Pods_Intercom_App.framework */; };
+		15D84DAB26963E5000F47748 /* Pods_Intercom_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F30C8D41480033DD3B9E2AA3 /* Pods_Intercom_App.framework */; };
+		15D84DAC26963E5000F47748 /* Pods_Intercom_App.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F30C8D41480033DD3B9E2AA3 /* Pods_Intercom_App.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4C69CE5D2243FF6B00FCC33A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C69CE5C2243FF6B00FCC33A /* AppDelegate.swift */; };
 		4C69CE622243FF6B00FCC33A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C69CE602243FF6B00FCC33A /* Main.storyboard */; };
 		4C69CE642243FF6D00FCC33A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C69CE632243FF6D00FCC33A /* Assets.xcassets */; };
@@ -60,6 +61,20 @@
 		A5DC52FD224AEFDB00A24589 /* disconnect.wav in Resources */ = {isa = PBXBuildFile; fileRef = A5DC52FA224AEFDB00A24589 /* disconnect.wav */; };
 		A5DC52FF224BE1A500A24589 /* GroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DC52FE224BE1A500A24589 /* GroupController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		15D84DAD26963E5000F47748 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				15D84DAC26963E5000F47748 /* Pods_Intercom_App.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4C69CE592243FF6B00FCC33A /* Intercom App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Intercom App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3396FE9202F45C9183EBEAD3 /* Pods_Intercom_App.framework in Frameworks */,
+				15D84DAB26963E5000F47748 /* Pods_Intercom_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +367,7 @@
 				4C69CE562243FF6B00FCC33A /* Frameworks */,
 				4C69CE572243FF6B00FCC33A /* Resources */,
 				B66AF02C6A283C6665DE9E88 /* [CP] Embed Pods Frameworks */,
+				15D84DAD26963E5000F47748 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -451,28 +467,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Intercom App/Pods-Intercom App-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Auth0/Auth0.framework",
-				"${BUILT_PRODUCTS_DIR}/SimpleKeychain/SimpleKeychain.framework",
-				"${BUILT_PRODUCTS_DIR}/Stripe/Stripe.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
-				"${PODS_ROOT}/TwilioVoice/TwilioVoice.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Intercom App/Pods-Intercom App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Auth0.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleKeychain.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Stripe.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwilioVoice.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Intercom App/Pods-Intercom App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -605,13 +604,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -660,12 +660,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -679,19 +680,20 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Intercom App/Intercom App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = LA9BGR5P4V;
 				INFOPLIST_FILE = "$(SRCROOT)/Intercom App/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lambdaschool.Sergey.Intercom-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Intercom App/Helper/Intercom App-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -704,18 +706,19 @@
 				CLANG_USE_OPTIMIZATION_PROFILE = YES;
 				CODE_SIGN_ENTITLEMENTS = "Intercom App/Intercom App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VXUQXR6S56;
+				DEVELOPMENT_TEAM = LA9BGR5P4V;
 				INFOPLIST_FILE = "$(SRCROOT)/Intercom App/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.lambdaschool.Sergey.Intercom-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Intercom App/Helper/Intercom App-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

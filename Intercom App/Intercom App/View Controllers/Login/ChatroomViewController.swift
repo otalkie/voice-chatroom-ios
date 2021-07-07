@@ -21,7 +21,7 @@ let accessTokenEndpoint = "accessToken"
 
 let twimlParamTo = "to"
 
-class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotificationDelegate, TVOCallDelegate, AVAudioPlayerDelegate, UITextFieldDelegate {
+class ChatroomViewController: UIViewController, PKPushRegistryDelegate, NotificationDelegate, CallDelegate, AVAudioPlayerDelegate, UITextFieldDelegate {
     
     @IBAction func groupNameTextFieldAction(_ sender: Any) {
         if let name = groupNameTextField.text {
@@ -51,8 +51,8 @@ class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotif
     var voipRegistry:PKPushRegistry
     var incomingPushCompletionCallback: (()->Swift.Void?)? = nil
     var incomingAlertController: UIAlertController?
-    var callInvite:TVOCallInvite?
-    var call:TVOCall?
+    var callInvite:CallInvite?
+    var call:Call?
     var ringtonePlayer:AVAudioPlayer?
     var ringtonePlaybackCallback: (() -> ())?
     var groupListVC = GroupListViewController()
@@ -370,7 +370,7 @@ class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotif
     }
     
     // MARK: TVONotificaitonDelegate
-    func callInviteReceived(_ callInvite: TVOCallInvite) {
+    func callInviteReceived(callInvite: CallInvite) {
         if (callInvite.state == .pending) {
             handleCallInviteReceived(callInvite)
         } else if (callInvite.state == .canceled) {
@@ -378,15 +378,15 @@ class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotif
         }
     }
     
-    func handleCallInviteReceived(_ callInvite: TVOCallInvite) {
+    func handleCallInviteReceived(_ callInvite: CallInvite) {
         NSLog("callInviteReceived:")
         
         if (self.callInvite != nil && self.callInvite?.state == .pending) {
-            NSLog("Already a pending call invite. Ignoring incoming call invite from \(callInvite.from)")
+            NSLog("Already a pending call invite. Ignoring incoming call invite from \(String(describing: callInvite.from))")
             self.incomingPushHandled()
             return
         } else if (self.call != nil && self.call?.state == .connected) {
-            NSLog("Already an active call. Ignoring incoming call invite from \(callInvite.from)");
+            NSLog("Already an active call. Ignoring incoming call invite from \(String(describing: callInvite.from))");
             self.incomingPushHandled()
             return;
         }
@@ -394,7 +394,7 @@ class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotif
         self.callInvite = callInvite;
         
         let from = callInvite.from
-        let alertMessage = "From: \(from)"
+        let alertMessage = "From: \(String(describing: from))"
         
         playIncomingRingtone()
         
@@ -445,7 +445,7 @@ class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotif
         // If the application is not in the foreground, post a local notification
         if (UIApplication.shared.applicationState != UIApplication.State.active) {
             let notification = UILocalNotification()
-            notification.alertBody = "Incoming Call From \(from)"
+            notification.alertBody = "Incoming Call From \(String(describing: from))"
             
             UIApplication.shared.presentLocalNotificationNow(notification)
         }
@@ -453,11 +453,11 @@ class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotif
         self.incomingPushHandled()
     }
     
-    func handleCallInviteCanceled(_ callInvite: TVOCallInvite) {
+    func handleCallInviteCanceled(_ callInvite: CallInvite) {
         NSLog("callInviteCanceled:")
         
         if (callInvite.callSid != self.callInvite?.callSid) {
-            NSLog("Incoming (but not current) call invite from \(callInvite.from) canceled. Just ignore it.");
+            NSLog("Incoming (but not current) call invite from \(String(describing: callInvite.from)) canceled. Just ignore it.");
             return;
         }
         
@@ -486,7 +486,7 @@ class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotif
     
     
     // MARK: TVOCallDelegate
-    func callDidConnect(_ call: TVOCall) {
+    func callDidConnect(call: Call) {
         NSLog("callDidConnect:")
         navigationController?.isNavigationBarHidden = true
         viewActivityButton.isHidden = true
@@ -504,14 +504,14 @@ class ChatroomViewController: UIViewController, PKPushRegistryDelegate, TVONotif
         toggleAudioRoute(toSpeaker: true)
     }
     
-    func call(_ call: TVOCall, didFailToConnectWithError error: Error) {
+    func callDidFailToConnect(call: Call, error: Error) {
         NSLog("Call failed to connect: \(error.localizedDescription)")
         
         callDisconnected()
         
     }
     
-    func call(_ call: TVOCall, didDisconnectWithError error: Error?) {
+    func callDidDisconnect(call: Call, error: Error?) {
         if let error = error {
             NSLog("Call failed: \(error.localizedDescription)")
         } else {
